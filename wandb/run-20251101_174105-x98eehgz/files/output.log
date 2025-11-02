@@ -1,0 +1,314 @@
+wandb: Detected [huggingface_hub.inference] in use.
+wandb: Use W&B Weave for improved LLM call tracing. Weave is installed but not imported. Add `import weave` to the top of your script.
+wandb: For more information, check out the docs at: https://weave-docs.wandb.ai/
+
+================================================================================
+Training Configuration: config3_r8_lr2e4_seq512
+GPU: 2 | LoRA r: 8 | LR: 0.0002
+Batch size: 4 | Grad accum: 2
+Max seq length: 512 | Samples: 10000
+================================================================================
+
+Loading model and tokenizer...
+==((====))==  Unsloth 2025.10.8: Fast Llama patching. Transformers: 4.56.2.
+   \\   /|    NVIDIA GeForce RTX 5060 Ti. Num GPUs = 1. Max memory: 15.477 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.8.0+cu128. CUDA: 12.0. CUDA Toolkit: 12.8. Triton: 3.4.0
+\        /    Bfloat16 = TRUE. FA [Xformers = None. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+Loading dataset...
+Training samples: 10000
+Validation samples: 500
+Formatting training dataset...
+Setting up LoRA...
+Unsloth 2025.10.8 patched 32 layers with 32 QKV layers, 32 O layers and 32 MLP layers.
+Configuring trainer...
+
+================================================================================
+Starting training: config3_r8_lr2e4_seq512
+================================================================================
+==((====))==  Unsloth - 2x faster free finetuning | Num GPUs used = 1
+   \\   /|    Num examples = 10,000 | Num Epochs = 3 | Total steps = 3,750
+O^O/ \_/ \    Batch size per device = 4 | Gradient accumulation steps = 2
+\        /    Data Parallel GPUs = 1 | Total batch size (4 x 2 x 1) = 8
+ "-____-"     Trainable parameters = 20,971,520 of 8,051,232,768 (0.26% trained)
+  0%|          | 1/3750 [00:06<6:51:42,  6.59s/it]Unsloth: Input IDs of shape torch.Size([4, 783]) with length 783 > the model's max sequence length of 512.
+
+Unsloth: Will smartly offload gradients to save VRAM!
+We shall truncate it ourselves. It's imperative if you correct this issue first.
+Traceback (most recent call last):
+  File "/workspace/nyu-dl/train_single_gpu_configurable.py", line 182, in <module>
+    trainer.train()
+  File "/workspace/nyu-dl/unsloth_compiled_cache/UnslothSFTTrainer.py", line 53, in wrapper
+    output = f(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/trainer.py", line 2328, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 325, in _fast_inner_training_loop
+  File "<string>", line 40, in _unsloth_training_step
+  File "/workspace/nyu-dl/unsloth_compiled_cache/UnslothSFTTrainer.py", line 902, in compute_loss
+    outputs = super().compute_loss(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth/models/_utils.py", line 1389, in _unsloth_pre_compute_loss
+    outputs = self._old_compute_loss(model, inputs, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 36, in compute_loss
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/accelerate/utils/operations.py", line 819, in forward
+    return model_forward(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/accelerate/utils/operations.py", line 807, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_compile.py", line 53, in inner
+    return disable_fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 929, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth/models/llama.py", line 1356, in PeftModel_fast_forward
+    return self.base_model(
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/peft/tuners/tuners_utils.py", line 222, in forward
+    return self.model.forward(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth/models/llama.py", line 1230, in _CausalLM_fast_forward
+    loss = unsloth_fused_ce_loss(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth_zoo/fused_losses/cross_entropy_loss.py", line 364, in unsloth_fused_ce_loss
+    return apply_autograd_function(UnslothFusedLoss, dict(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth_zoo/fused_losses/cross_entropy_loss.py", line 41, in apply_autograd_function
+    return getattr(autograd, "apply")(*(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/autograd/function.py", line 576, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth_zoo/fused_losses/cross_entropy_loss.py", line 304, in forward
+    accumulate_chunk(
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 736, in compile_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 1495, in __call__
+    return self._torchdynamo_orig_callable(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 629, in __call__
+    return _compile(
+           ^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 1111, in _compile
+    guarded_code = compile_inner(code, one_graph, hooks, transform)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_utils_internal.py", line 97, in wrapper_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 793, in compile_inner
+    return _compile_inner(code, one_graph, hooks, transform)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 832, in _compile_inner
+    out_code = transform_code_object(code, transform)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/bytecode_transformation.py", line 1424, in transform_code_object
+    transformations(instructions, code_options)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 267, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 753, in transform
+    tracer.run()
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3497, in run
+    super().run()
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1363, in run
+    while self.step():
+          ^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1267, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 834, in wrapper
+    return inner_fn(self, inst)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 2228, in CALL_FUNCTION_EX
+    self.call_function(fn, argsvars.items, kwargsvars)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1193, in call_function
+    self.push(fn.call_function(self, args, kwargs))  # type: ignore[arg-type]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/functions.py", line 293, in call_function
+    return tx.inline_user_function_return(self, [*self.self_args(), *args], kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1210, in inline_user_function_return
+    return InliningInstructionTranslator.inline_call(self, fn, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3698, in inline_call
+    return tracer.inline_call_()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3901, in inline_call_
+    self.run()
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1363, in run
+    while self.step():
+          ^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1267, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 834, in wrapper
+    return inner_fn(self, inst)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 2910, in CALL
+    self._call(inst)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 2904, in _call
+    self.call_function(fn, args, kwargs)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1193, in call_function
+    self.push(fn.call_function(self, args, kwargs))  # type: ignore[arg-type]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/lazy.py", line 201, in realize_and_forward
+    return getattr(self.realize(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/functions.py", line 529, in call_function
+    return super().call_function(tx, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/functions.py", line 293, in call_function
+    return tx.inline_user_function_return(self, [*self.self_args(), *args], kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1210, in inline_user_function_return
+    return InliningInstructionTranslator.inline_call(self, fn, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3698, in inline_call
+    return tracer.inline_call_()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3901, in inline_call_
+    self.run()
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1363, in run
+    while self.step():
+          ^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1267, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 834, in wrapper
+    return inner_fn(self, inst)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 2228, in CALL_FUNCTION_EX
+    self.call_function(fn, argsvars.items, kwargsvars)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1193, in call_function
+    self.push(fn.call_function(self, args, kwargs))  # type: ignore[arg-type]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/lazy.py", line 201, in realize_and_forward
+    return getattr(self.realize(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/functions.py", line 529, in call_function
+    return super().call_function(tx, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/functions.py", line 293, in call_function
+    return tx.inline_user_function_return(self, [*self.self_args(), *args], kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1210, in inline_user_function_return
+    return InliningInstructionTranslator.inline_call(self, fn, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3698, in inline_call
+    return tracer.inline_call_()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3901, in inline_call_
+    self.run()
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1363, in run
+    while self.step():
+          ^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1267, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 834, in wrapper
+    return inner_fn(self, inst)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 2228, in CALL_FUNCTION_EX
+    self.call_function(fn, argsvars.items, kwargsvars)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1193, in call_function
+    self.push(fn.call_function(self, args, kwargs))  # type: ignore[arg-type]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/functions.py", line 529, in call_function
+    return super().call_function(tx, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/functions.py", line 293, in call_function
+    return tx.inline_user_function_return(self, [*self.self_args(), *args], kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1210, in inline_user_function_return
+    return InliningInstructionTranslator.inline_call(self, fn, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3698, in inline_call
+    return tracer.inline_call_()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3901, in inline_call_
+    self.run()
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1363, in run
+    while self.step():
+          ^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1267, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 834, in wrapper
+    return inner_fn(self, inst)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 2910, in CALL
+    self._call(inst)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 2904, in _call
+    self.call_function(fn, args, kwargs)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1193, in call_function
+    self.push(fn.call_function(self, args, kwargs))  # type: ignore[arg-type]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/lazy.py", line 201, in realize_and_forward
+    return getattr(self.realize(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/torch.py", line 1338, in call_function
+    tensor_variable = wrap_fx_proxy(
+                      ^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/builder.py", line 2559, in wrap_fx_proxy
+    return wrap_fx_proxy_cls(target_cls=TensorVariable, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/builder.py", line 2625, in wrap_fx_proxy_cls
+    return _wrap_fx_proxy(
+           ^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/variables/builder.py", line 2723, in _wrap_fx_proxy
+    example_value = get_fake_value(proxy.node, tx, allow_non_graph_fake=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/utils.py", line 3355, in get_fake_value
+    raise TorchRuntimeError(str(e)).with_traceback(e.__traceback__) from None
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/utils.py", line 3253, in get_fake_value
+    ret_val = wrap_fake_exception(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/utils.py", line 2753, in wrap_fake_exception
+    return fn()
+           ^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/utils.py", line 3254, in <lambda>
+    lambda: run_node(tx.output, node, args, kwargs, nnmodule)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/utils.py", line 3462, in run_node
+    raise RuntimeError(make_error_message(e)).with_traceback(
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_dynamo/utils.py", line 3421, in run_node
+    return node.target(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/nn/functional.py", line 3462, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch._dynamo.exc.TorchRuntimeError: Dynamo failed to run FX node with fake tensors: call_function <function cross_entropy at 0x7ff46c374720>(*(), **{'input': GradTrackingTensor(lvl=1, value=
+    FakeTensor(..., device='cuda:0', size=(s97, 128256))
+), 'target': GradTrackingTensor(lvl=1, value=
+    FakeTensor(..., device='cuda:0', size=(s7,), dtype=torch.int64)
+), 'reduction': 'sum'}): got ValueError('Expected input batch_size (s97) to match target batch_size (s7).')
+
+from user code:
+   File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth_zoo/fused_losses/cross_entropy_loss.py", line 276, in accumulate_chunk
+    (chunk_loss, (unscaled_loss,)) = torch.func.grad_and_value(
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_functorch/apis.py", line 441, in wrapper
+    return eager_transforms.grad_and_value_impl(
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_functorch/vmap.py", line 48, in fn
+    return f(*args, **kwargs)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/_functorch/eager_transforms.py", line 1365, in grad_and_value_impl
+    output = func(*args, **kwargs)
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth_zoo/fused_losses/cross_entropy_loss.py", line 98, in compute_fused_ce_loss
+    loss = torch.nn.functional.cross_entropy(
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"

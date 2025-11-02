@@ -1,0 +1,49 @@
+wandb: Detected [huggingface_hub.inference] in use.
+wandb: Use W&B Weave for improved LLM call tracing. Weave is installed but not imported. Add `import weave` to the top of your script.
+wandb: For more information, check out the docs at: https://weave-docs.wandb.ai/
+
+================================================================================
+Training Configuration: config3_r8_lr2e4_seq512
+GPU: 2 | LoRA r: 8 | LR: 0.0002
+Batch size: 4 | Grad accum: 2
+Max seq length: 512 | Samples: 10000
+================================================================================
+
+Loading model and tokenizer...
+==((====))==  Unsloth 2025.10.8: Fast Llama patching. Transformers: 4.56.2.
+   \\   /|    NVIDIA GeForce RTX 5060 Ti. Num GPUs = 4. Max memory: 15.477 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.8.0+cu128. CUDA: 12.0. CUDA Toolkit: 12.8. Triton: 3.4.0
+\        /    Bfloat16 = TRUE. FA [Xformers = None. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+Traceback (most recent call last):
+  File "/workspace/nyu-dl/train_single_gpu_configurable.py", line 64, in <module>
+    model, tokenizer = FastLanguageModel.from_pretrained(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth/models/loader.py", line 480, in from_pretrained
+    model, tokenizer = dispatch_model.from_pretrained(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth/models/llama.py", line 2035, in from_pretrained
+    model = AutoModelForCausalLM.from_pretrained(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/models/auto/auto_factory.py", line 604, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/modeling_utils.py", line 288, in _wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/modeling_utils.py", line 5106, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 420, in __init__
+    self.model = LlamaModel(config)
+                 ^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 345, in __init__
+    self.rotary_emb = LlamaRotaryEmbedding(config=config)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth/models/llama.py", line 1405, in __init__
+    self._set_cos_sin_cache(seq_len=self.current_rope_size, device=torch.device(device_idx), dtype=torch.get_default_dtype())
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth/models/llama.py", line 1424, in _set_cos_sin_cache
+    cos = emb.cos().to(dtype=dtype, device=device, non_blocking=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 16.00 MiB. GPU 0 has a total capacity of 15.48 GiB of which 11.56 MiB is free. Including non-PyTorch memory, this process has 220.00 MiB memory in use. Process 101686 has 2.85 GiB memory in use. Process 101687 has 5.38 GiB memory in use. Process 101689 has 6.99 GiB memory in use. Of the allocated memory 10.00 MiB is allocated by PyTorch, and 10.00 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

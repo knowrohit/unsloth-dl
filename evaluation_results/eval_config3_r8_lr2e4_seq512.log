@@ -1,0 +1,33 @@
+🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
+Skipping import of cpp extensions due to incompatible torch version 2.8.0+cu128 for torchao version 0.14.1             Please see https://github.com/pytorch/ao/issues/2919 for more info
+========
+Switching to PyTorch attention since your Xformers is broken.
+========
+
+Unsloth: Xformers does not work in RTX 50X, Blackwell GPUs as of yet. Please build from source via
+```
+pip install ninja
+pip install -v --no-build-isolation -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers
+```
+
+🦥 Unsloth Zoo will now patch everything to make training faster!
+Warning: sklearn not found, will calculate metrics manually
+
+================================================================================
+Evaluating Model: models/config3_r8_lr2e4_seq512
+GPU: 2
+================================================================================
+
+Loading model and tokenizer...
+Traceback (most recent call last):
+  File "/workspace/nyu-dl/evaluate_model.py", line 46, in <module>
+    model, tokenizer = FastLanguageModel.from_pretrained(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth/models/loader.py", line 281, in from_pretrained
+    model_types = get_transformers_model_type(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth_zoo/hf_utils.py", line 112, in get_transformers_model_type
+    raise RuntimeError(
+RuntimeError: Unsloth: No config file found - are you sure the `model_name` is correct?
+If you're using a model on your local device, confirm if the folder location exists.
+If you're using a HuggingFace online model, check if it exists.

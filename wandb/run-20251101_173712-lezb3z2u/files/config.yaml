@@ -1,0 +1,116 @@
+_wandb:
+    value:
+        cli_version: 0.22.3
+        e:
+            b5olb1ks8q0pa7rm5yb9i4i3bbgksr54:
+                args:
+                    - --gpu_id
+                    - "2"
+                    - --lora_r
+                    - "8"
+                    - --learning_rate
+                    - "2e-4"
+                    - --batch_size
+                    - "4"
+                    - --grad_accum
+                    - "2"
+                    - --max_seq_length
+                    - "512"
+                    - --train_samples
+                    - "10000"
+                    - --epochs
+                    - "3"
+                    - --wandb_project
+                    - math-verification-multiconfig
+                    - --output_name
+                    - config3_r8_lr2e4_seq512
+                codePath: train_single_gpu_configurable.py
+                codePathLocal: train_single_gpu_configurable.py
+                cpu_count: 48
+                cpu_count_logical: 96
+                cudaVersion: "13.0"
+                disk:
+                    /:
+                        total: "34359738368"
+                        used: "15718367232"
+                email: rohitrocker2001@gmail.com
+                executable: /workspace/nyu-dl/.venv/bin/python3
+                gpu: NVIDIA GeForce RTX 5060 Ti
+                gpu_count: 4
+                gpu_nvidia:
+                    - architecture: Blackwell
+                      cudaCores: 4608
+                      memoryTotal: "17103323136"
+                      name: NVIDIA GeForce RTX 5060 Ti
+                      uuid: GPU-7206d636-5596-cae3-6238-558a0c217ba4
+                    - architecture: Blackwell
+                      cudaCores: 4608
+                      memoryTotal: "17103323136"
+                      name: NVIDIA GeForce RTX 5060 Ti
+                      uuid: GPU-69a1ff39-7353-8057-7582-de10dbd46fc6
+                    - architecture: Blackwell
+                      cudaCores: 4608
+                      memoryTotal: "17103323136"
+                      name: NVIDIA GeForce RTX 5060 Ti
+                      uuid: GPU-faaf0063-87c8-30e4-a21e-18860ea350a7
+                    - architecture: Blackwell
+                      cudaCores: 4608
+                      memoryTotal: "17103323136"
+                      name: NVIDIA GeForce RTX 5060 Ti
+                      uuid: GPU-48a52951-9b86-2c29-74ee-62e42f9a34cf
+                host: 7f1622fe4bc3
+                memory:
+                    total: "270087229440"
+                os: Linux-6.8.0-85-generic-x86_64-with-glibc2.39
+                program: /workspace/nyu-dl/train_single_gpu_configurable.py
+                python: CPython 3.11.13
+                root: /workspace/nyu-dl
+                startedAt: "2025-11-01T17:37:12.823987Z"
+                writerId: b5olb1ks8q0pa7rm5yb9i4i3bbgksr54
+        m: []
+        python_version: 3.11.13
+        t:
+            "1":
+                - 1
+                - 11
+                - 41
+                - 49
+                - 51
+                - 71
+                - 83
+                - 84
+                - 98
+            "2":
+                - 1
+                - 11
+                - 41
+                - 49
+                - 51
+                - 71
+                - 83
+                - 84
+                - 98
+            "3":
+                - 13
+                - 16
+            "4": 3.11.13
+            "5": 0.22.3
+            "6": 4.56.2
+            "12": 0.22.3
+            "13": linux-x86_64
+batch_size:
+    value: 4
+epochs:
+    value: 3
+gpu_id:
+    value: 2
+grad_accum:
+    value: 2
+learning_rate:
+    value: 0.0002
+lora_r:
+    value: 8
+max_seq_length:
+    value: 512
+train_samples:
+    value: 10000

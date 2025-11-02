@@ -1,0 +1,54 @@
+wandb: Detected [huggingface_hub.inference] in use.
+wandb: Use W&B Weave for improved LLM call tracing. Weave is installed but not imported. Add `import weave` to the top of your script.
+wandb: For more information, check out the docs at: https://weave-docs.wandb.ai/
+
+================================================================================
+Training Configuration: config3_r8_lr2e4_seq512
+GPU: 2 | LoRA r: 8 | LR: 0.0002
+Batch size: 4 | Grad accum: 2
+Max seq length: 512 | Samples: 10000
+================================================================================
+
+Loading model and tokenizer...
+==((====))==  Unsloth 2025.10.8: Fast Llama patching. Transformers: 4.56.2.
+   \\   /|    NVIDIA GeForce RTX 5060 Ti. Num GPUs = 4. Max memory: 15.477 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.8.0+cu128. CUDA: 12.0. CUDA Toolkit: 12.8. Triton: 3.4.0
+\        /    Bfloat16 = TRUE. FA [Xformers = None. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+INFO:accelerate.utils.modeling: Based on the current allocation process, no modules could be assigned to the following devices due to insufficient memory:
+  - 0: 1313341440.0 bytes required
+These minimum requirements are specific to this allocation attempt and may vary. Consider increasing the available memory for these devices to at least the specified minimum, or adjusting the model config.
+Loading dataset...
+Training samples: 10000
+Validation samples: 500
+Formatting training dataset...
+Setting up LoRA...
+Unsloth 2025.10.8 patched 32 layers with 32 QKV layers, 32 O layers and 32 MLP layers.
+Configuring trainer...
+
+================================================================================
+Starting training: config3_r8_lr2e4_seq512
+================================================================================
+Traceback (most recent call last):
+  File "/workspace/nyu-dl/train_single_gpu_configurable.py", line 180, in <module>
+    trainer.train()
+  File "/workspace/nyu-dl/unsloth_compiled_cache/UnslothSFTTrainer.py", line 53, in wrapper
+    output = f(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/trainer.py", line 2328, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 128, in _fast_inner_training_loop
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/accelerate/accelerator.py", line 1559, in prepare
+    result = tuple(
+             ^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/accelerate/accelerator.py", line 1560, in <genexpr>
+    self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/accelerate/accelerator.py", line 1402, in _prepare_one
+    return self.prepare_model(obj, device_placement=device_placement)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/accelerate/accelerator.py", line 1792, in prepare_model
+    raise ValueError(
+ValueError: You can't train a model that has been loaded in 8-bit or 4-bit precision on a different device than the one you're training on. Make sure you loaded the model on the correct device using for example `device_map={'':torch.cuda.current_device()}` or `device_map={'':torch.xpu.current_device()}`

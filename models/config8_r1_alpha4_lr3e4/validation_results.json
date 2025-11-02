@@ -1,0 +1,18 @@
+{
+  "model_path": "models/config8_r1_alpha4_lr3e4",
+  "validation_samples": 500,
+  "accuracy": 0.808,
+  "precision": 0.7945945945945946,
+  "recall": 0.7170731707317073,
+  "f1_score": 0.7538461538461537,
+  "confusion_matrix": [
+    [
+      257,
+      38
+    ],
+    [
+      58,
+      147
+    ]
+  ]
+}

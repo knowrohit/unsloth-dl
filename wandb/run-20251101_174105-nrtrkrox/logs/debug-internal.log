@@ -1,0 +1,12 @@
+{"time":"2025-11-01T17:41:06.198830395Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-01T17:41:07.021530899Z","level":"INFO","msg":"stream: created new stream","id":"nrtrkrox"}
+{"time":"2025-11-01T17:41:07.021686412Z","level":"INFO","msg":"handler: started","stream_id":"nrtrkrox"}
+{"time":"2025-11-01T17:41:07.021869185Z","level":"INFO","msg":"stream: started","id":"nrtrkrox"}
+{"time":"2025-11-01T17:41:07.021945156Z","level":"INFO","msg":"writer: started","stream_id":"nrtrkrox"}
+{"time":"2025-11-01T17:41:07.021976397Z","level":"INFO","msg":"sender: started","stream_id":"nrtrkrox"}
+{"time":"2025-11-01T21:53:58.616084483Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-01T21:53:59.274140042Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-01T21:53:59.281134888Z","level":"INFO","msg":"stream: closing","id":"nrtrkrox"}
+{"time":"2025-11-01T21:53:59.281160929Z","level":"INFO","msg":"handler: closed","stream_id":"nrtrkrox"}
+{"time":"2025-11-01T21:53:59.281309773Z","level":"INFO","msg":"sender: closed","stream_id":"nrtrkrox"}
+{"time":"2025-11-01T21:53:59.281326113Z","level":"INFO","msg":"stream: closed","id":"nrtrkrox"}

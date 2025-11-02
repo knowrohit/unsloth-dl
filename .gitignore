@@ -1,0 +1,41 @@
+# Model files
+*.pt
+*.safetensors
+*.bin
+*.ckpt
+*.pth
+*.h5
+*.onnx
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and outputs (optional - uncomment if you want to ignore these)
+# logs/
+# outputs/
+# outputs_single_gpu/
+# evaluation_results/
+# wandb/
+
+# Large model directories (optional - uncomment if you want to ignore these)
+# models/
+

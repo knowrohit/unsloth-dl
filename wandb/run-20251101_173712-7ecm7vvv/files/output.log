@@ -1,0 +1,55 @@
+wandb: Detected [huggingface_hub.inference] in use.
+wandb: Use W&B Weave for improved LLM call tracing. Weave is installed but not imported. Add `import weave` to the top of your script.
+wandb: For more information, check out the docs at: https://weave-docs.wandb.ai/
+
+================================================================================
+Training Configuration: config2_r16_lr3e4
+GPU: 1 | LoRA r: 16 | LR: 0.0003
+Batch size: 2 | Grad accum: 4
+Max seq length: 1024 | Samples: 10000
+================================================================================
+
+Loading model and tokenizer...
+==((====))==  Unsloth 2025.10.8: Fast Llama patching. Transformers: 4.56.2.
+   \\   /|    NVIDIA GeForce RTX 5060 Ti. Num GPUs = 4. Max memory: 15.477 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.8.0+cu128. CUDA: 12.0. CUDA Toolkit: 12.8. Triton: 3.4.0
+\        /    Bfloat16 = TRUE. FA [Xformers = None. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+Traceback (most recent call last):
+  File "/workspace/nyu-dl/train_single_gpu_configurable.py", line 65, in <module>
+    model, tokenizer = FastLanguageModel.from_pretrained(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth/models/loader.py", line 480, in from_pretrained
+    model, tokenizer = dispatch_model.from_pretrained(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/unsloth/models/llama.py", line 2035, in from_pretrained
+    model = AutoModelForCausalLM.from_pretrained(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/models/auto/auto_factory.py", line 604, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/modeling_utils.py", line 288, in _wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/modeling_utils.py", line 5179, in from_pretrained
+    ) = cls._load_pretrained_model(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/modeling_utils.py", line 5642, in _load_pretrained_model
+    _error_msgs, disk_offload_index, cpu_offload_index = load_shard_file(args)
+                                                         ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/modeling_utils.py", line 946, in load_shard_file
+    disk_offload_index, cpu_offload_index = _load_state_dict_into_meta_model(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/modeling_utils.py", line 854, in _load_state_dict_into_meta_model
+    hf_quantizer.create_quantized_param(
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/transformers/quantizers/quantizer_bnb_4bit.py", line 234, in create_quantized_param
+    new_value = bnb.nn.Params4bit.from_prequantized(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/nyu-dl/.venv/lib/python3.11/site-packages/bitsandbytes/nn/modules.py", line 278, in from_prequantized
+    self = torch.Tensor._make_subclass(cls, data.to(device))
+                                            ^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 28.00 MiB. GPU 0 has a total capacity of 15.48 GiB of which 28.38 MiB is free. Process 101689 has 10.80 GiB memory in use. Process 105661 has 220.00 MiB memory in use. Process 105658 has 1.27 GiB memory in use. Including non-PyTorch memory, this process has 2.87 GiB memory in use. Process 105660 has 260.00 MiB memory in use. Of the allocated memory 2.66 GiB is allocated by PyTorch, and 1.59 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

@@ -1,0 +1,13 @@
+{"time":"2025-11-02T02:16:46.535856037Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-02T02:16:47.351432573Z","level":"INFO","msg":"stream: created new stream","id":"k3p325wa"}
+{"time":"2025-11-02T02:16:47.351617816Z","level":"INFO","msg":"handler: started","stream_id":"k3p325wa"}
+{"time":"2025-11-02T02:16:47.352169715Z","level":"INFO","msg":"stream: started","id":"k3p325wa"}
+{"time":"2025-11-02T02:16:47.353159701Z","level":"INFO","msg":"sender: started","stream_id":"k3p325wa"}
+{"time":"2025-11-02T02:16:47.353188161Z","level":"INFO","msg":"writer: started","stream_id":"k3p325wa"}
+{"time":"2025-11-02T03:56:03.598776425Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/projectsolomon/math-verification-multiconfig/k3p325wa/file_stream\": dial tcp: lookup api.wandb.ai on 192.168.100.1:53: server misbehaving"}
+{"time":"2025-11-02T06:30:10.010595199Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-02T06:30:10.66882334Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-02T06:30:10.674219774Z","level":"INFO","msg":"stream: closing","id":"k3p325wa"}
+{"time":"2025-11-02T06:30:10.674229184Z","level":"INFO","msg":"handler: closed","stream_id":"k3p325wa"}
+{"time":"2025-11-02T06:30:10.674305067Z","level":"INFO","msg":"sender: closed","stream_id":"k3p325wa"}
+{"time":"2025-11-02T06:30:10.674313237Z","level":"INFO","msg":"stream: closed","id":"k3p325wa"}
